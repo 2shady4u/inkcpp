@@ -274,17 +274,18 @@ env.Append(CPPPATH=[
 
 inkcpp_env = env.Clone()
 inkcpp_sources = [Glob('inkcpp/*.cpp')]
-inkcpp_library = inkcpp_env.Library(target=env['target_path'] + 'inkcpp', source=inkcpp_sources)
+inkcpp_library = inkcpp_env.Library(target=env['target_path'] + 'libinkcpp', source=inkcpp_sources)
 
 inkcpp_compiler_env = env.Clone()
 inkcpp_compiler_env.Append(CPPDEFINES=['INK_COMPILER', 'INK_EXPOSE_JSON'])
 inkcpp_compiler_sources = [Glob('inkcpp_compiler/*.cpp')]
-inkcpp_compiler_library = inkcpp_compiler_env.Library(target=env['target_path'] + 'inkcpp_compiler', source=inkcpp_compiler_sources)
+inkcpp_compiler_library = inkcpp_compiler_env.Library(target=env['target_path'] + 'libinkcpp_compiler', source=inkcpp_compiler_sources)
 
 env.Append(LIBS=[
-    env['target_path'] + 'inkcpp',
-    env['target_path'] + 'inkcpp_compiler'
+    'libinkcpp',
+    'libinkcpp_compiler'
 ])
+env.Append(LIBPATH=[env['target_path']])
 
 # tweak this if you want to use different folders, or more folders, to store your source code in.
 env.Append(CPPPATH=['inkcpp_cl/'])
